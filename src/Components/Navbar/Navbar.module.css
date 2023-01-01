@@ -1,0 +1,14 @@
+.nav {
+  grid-row: 2/3;
+  grid-column: 1/2;
+  background-color: #a4b9cb;
+
+}
+
+.navList {
+  list-style: none;
+}
+
+.navList a {
+  text-decoration: none;
+}
