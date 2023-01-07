@@ -1,0 +1,13 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+  
+  .dialogsItems li {
+    list-style: none;
+    padding: 10px;
+  }
+  
+.selected{
+    color: blueviolet;
+}

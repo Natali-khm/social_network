@@ -1,16 +1,19 @@
-import styles from "./Navbar.module.css";
+import MyPosts from "./My posts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import styles from './Profile.module.css'
+import { PostType } from "../../redux/testState";
 
-const Profile = () => {
+export type postsPropsType = {
+  posts: Array<PostType>
+  addPostText: (postText: string) => void
+}
+
+const Profile = (props: postsPropsType) => {
   return (
-    <>
-      <div>ava + description</div>
-      <div>
-        My posts
-        <div>new post</div>
-        <div>post 1</div>
-        <div>post 2</div>
-      </div>
-    </>
+    <div className={styles.profileBlock}>
+      <ProfileInfo />
+      <MyPosts posts={props.posts}  addPostText={props.addPostText}/>
+    </div>
   );
 };
 
