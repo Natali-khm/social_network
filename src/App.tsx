@@ -4,16 +4,14 @@ import Dialogs from "./Components/Dialogs/Dialogs";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
-import { DialogType, MessageType, PostType } from "./redux/testState";
-import React from 'react'
+import { TestState } from "./redux/testState";
 
 
 export type AppPropsType = {
-  dialogs: Array <DialogType>
-  messages: Array <MessageType>
-  posts: Array<PostType>
-  addPostText: (postText: string) => void
-}
+  state: TestState;
+  addPostText: () => void;
+  changePostText: (text: string) => void;
+};
 
 const App = (props: AppPropsType) => {
   return (
@@ -22,11 +20,11 @@ const App = (props: AppPropsType) => {
       <Navbar />
       <div className="app-wrapper-content">
         <Switch>
-          <Route path="/dialogs"><Dialogs dialogs={props.dialogs} messages={props.messages}/></Route>
+          <Route path="/dialogs"><Dialogs dialogsPage={props.state.dialogsPage}/></Route>
           <Route path="/news">news</Route>
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>
-          <Route path="/"><Profile posts = {props.posts}  addPostText={props.addPostText}/></Route>
+          <Route path="/"><Profile profilePage = {props.state.profilePage} addPostText={props.addPostText} changePostText = {props.changePostText}/></Route>
         </Switch>
       </div>
     </div>

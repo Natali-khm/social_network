@@ -1,18 +1,22 @@
 import MyPosts from "./My posts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import styles from './Profile.module.css'
-import { PostType } from "../../redux/testState";
+import { ProfilePageType } from "../../redux/testState";
 
 export type postsPropsType = {
-  posts: Array<PostType>
-  addPostText: (postText: string) => void
+  profilePage: ProfilePageType
+  addPostText: () => void
+  changePostText: (text: string) => void
 }
 
 const Profile = (props: postsPropsType) => {
   return (
     <div className={styles.profileBlock}>
       <ProfileInfo />
-      <MyPosts posts={props.posts}  addPostText={props.addPostText}/>
+      <MyPosts posts={props.profilePage.posts} 
+               postText = {props.profilePage.postText} 
+               addPostText={props.addPostText} 
+               changePostText = {props.changePostText}/>
     </div>
   );
 };
