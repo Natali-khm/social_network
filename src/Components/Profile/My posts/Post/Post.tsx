@@ -8,15 +8,20 @@ type Post = {
 }
 
 const Post = (props: Post) => {
+
   return (
-    <div className={styles.postBlock}>
+
+    <li className={styles.postBlock}>
+
       <img src={userAvatar} className={styles.userAvatar} />
       <span>Name</span>
       <div className={styles.postText}> {props.message}</div>
+
       <div>
         <span className={styles.likesCount}>{"like " + props.likesCount}</span>
       </div>
-    </div>
+
+    </li>
   );
 };
 

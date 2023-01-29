@@ -2,14 +2,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import store, { TestState } from "./redux/testState";
+import store, { TestStateType } from "./redux/testState";
 
 
-let renderApp = (state: TestState) => ReactDOM.render(
+let renderApp = (state: TestStateType) => ReactDOM.render(
   <BrowserRouter>
     <App state = {state}
-         addPostText = {store.addPostText.bind(store)}
-         changePostText = {store.changePostText.bind(store)}
+         dispatch = {store.dispatch.bind(store)}
     />
   </BrowserRouter>,
   document.getElementById("root")

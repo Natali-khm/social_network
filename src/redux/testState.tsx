@@ -1,3 +1,11 @@
+const ADD_POST = 'ADD_POST'
+const CHANGE_NEW_POST_TEXT = 'CHANGE_NEW_POST_TEXT'
+
+export const addPostActionCreator = (): ActionType => ({type: ADD_POST});
+
+export const changeNewPostTextActionCreator = (newText: string): ActionType => ({type: CHANGE_NEW_POST_TEXT, newText});
+
+
 export type DialogType = {
   id: string;
   name: string;
@@ -16,7 +24,7 @@ export type PostType = {
 
 
 
-export type DialogsPage = {
+export type DialogsPageType = {
   messages: Array<MessageType>;
   dialogs: Array<DialogType>;
 };
@@ -28,18 +36,24 @@ export type ProfilePageType = {
 
 
 
-export type TestState = {
+export type TestStateType = {
   profilePage: ProfilePageType;
-  dialogsPage: DialogsPage;
+  dialogsPage: DialogsPageType;
 };
 
+export type ActionType = {
+  type: 'ADD_POST' | 'CHANGE_NEW_POST_TEXT'
+  newText?: string
+}
+
 export type Store = {
-  _testState: TestState
-  getState: () => TestState
+  _testState: TestStateType
+  getState: () => TestStateType
   addPostText: () => void
-  changePostText: (text: string) => void
+  changeNewPostText: (text: string) => void
   _callSubscriber: () => void
   subscribe: (observer: () => void) => void
+  dispatch: (action: ActionType) => void
 }
 
 
@@ -68,21 +82,23 @@ let store = {
     },
   },
   getState(){ return this._testState },
-  addPostText() {
-    this._testState.profilePage.posts.push({
-      id: "3",
-      message: this._testState.profilePage.postText,
-      likesCount: "0",
-    });
-    this._testState.profilePage.postText = "";
-    this._callSubscriber();
-  },
-  changePostText(text: string) {
-    this._testState.profilePage.postText = text;
-    this._callSubscriber();
-  },
   _callSubscriber: () => {},
   subscribe(observer: () => void) { this._callSubscriber = observer; },
+  dispatch (action: ActionType) {
+    if (action.type === 'ADD_POST'){ 
+        this._testState.profilePage.posts.push({
+          id: "3",
+          message: this._testState.profilePage.postText,
+          likesCount: "0",
+        });
+        this._testState.profilePage.postText = "";
+        this._callSubscriber();      
+     }
+    if (action.type === 'CHANGE_NEW_POST_TEXT'){
+          if (action.newText) { this._testState.profilePage.postText = action.newText;}
+          this._callSubscriber();
+    }
+  } 
 };
 
 

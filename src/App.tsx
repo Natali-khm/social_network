@@ -4,16 +4,15 @@ import Dialogs from "./Components/Dialogs/Dialogs";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
-import { TestState } from "./redux/testState";
+import { ActionType, TestStateType } from "./redux/testState";
 
 
 export type AppPropsType = {
-  state: TestState;
-  addPostText: () => void;
-  changePostText: (text: string) => void;
+  state: TestStateType;
+  dispatch: (action: ActionType) => void;
 };
 
-const App = (props: AppPropsType) => {
+const App: React.FC <AppPropsType> = (props) => {
   return (
     <div className="app-wrapper">
       <Header />
@@ -24,7 +23,10 @@ const App = (props: AppPropsType) => {
           <Route path="/news">news</Route>
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>
-          <Route path="/"><Profile profilePage = {props.state.profilePage} addPostText={props.addPostText} changePostText = {props.changePostText}/></Route>
+          <Route path="/"><Profile 
+                            profilePage = {props.state.profilePage} 
+                            dispatch = {props.dispatch}
+                            /></Route>
         </Switch>
       </div>
     </div>

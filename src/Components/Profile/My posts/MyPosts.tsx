@@ -1,47 +1,61 @@
 import React from 'react'
-import store, { PostType } from '../../../redux/testState';
-import { postsPropsType } from "../Profile";
+import { ActionType, addPostActionCreator, changeNewPostTextActionCreator, PostType } from '../../../redux/testState';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 
 type MyPostsPropsType = {
   posts: Array<PostType>
   postText: string
-  addPostText: () => void
-  changePostText: (text: string) => void
+  dispatch: (action: ActionType) => void;
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
+
+
+
+const MyPosts: React.FC <MyPostsPropsType> = (props) => {
+
   let newPostElement = React.createRef<HTMLTextAreaElement>();
   
-  const getText = () => {
+  const addPost = () => {
     if (newPostElement.current) {
-      props.addPostText()
+      props.dispatch(addPostActionCreator())
     }
   };
 
-  const changePostText = () => {
+  const changeNewPostText = () => {
     if (newPostElement.current) {
-      props.changePostText(newPostElement.current.value);
+      props.dispatch(changeNewPostTextActionCreator(newPostElement.current.value));
     }
   };
+
+  const postsForRender = props.posts
+        .map(post => ( <Post message={post.message} likesCount={post.likesCount} key={post.id} /> ))
+        .reverse();
+
+  const [listRef] = useAutoAnimate<HTMLUListElement>() 
 
   return (
+
     <div className={styles.MyPostsBlock}>
+      
       <h2>My posts</h2>
+
       <div className={styles.inputBlock}>
+
         <textarea ref={newPostElement} 
                   placeholder={'What\'s new?'} 
                   value={props.postText} 
-                  onChange={(event)=>changePostText()}/>
-        <button onClick={getText}>Add post</button>
+                  onChange={changeNewPostText}/>
+
+        <button onClick={addPost}>Add post</button>
+
       </div>
-      <div className={styles.postsBlock}>
-        {props.posts
-        .map(post => ( <Post message={post.message} likesCount={post.likesCount} key={post.id} /> ))
-        .reverse()}
-      </div>
+
+      <ul className={styles.postsBlock} ref={listRef}>
+        {postsForRender}
+      </ul>
     </div>
   );
 };
