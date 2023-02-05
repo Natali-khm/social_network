@@ -1,13 +1,40 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-  }
-  
-  .dialogsItems li {
-    list-style: none;
-    padding: 10px;
-  }
-  
-.selected{
-    color: blueviolet;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.dialogsItems {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* border: 1px solid black; */
+  padding-left: 3px;
+}
+
+.selected {
+  /* color: blueviolet; */
+}
+
+.messages{
+  background-color: white;
+}
+
+.inputBlock{
+  display: flex;
+  padding: 10px;
+  gap: 5px;
+  border: 1px solid rgb(229, 229, 233);
+  background-color: rgb(246, 246, 246);
+}
+
+.textArea{
+  flex-grow: 1;
+  border: 1px solid rgb(229, 229, 233);
+  resize: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+textArea:focus{
+  outline: none;
 }

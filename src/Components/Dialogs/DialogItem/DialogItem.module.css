@@ -1,0 +1,25 @@
+.userAvatar{
+  width: 60px;
+}
+
+
+.dialogItem {
+  text-decoration: none;
+  border: 1px solid rgb(229, 229, 233);
+  display: block;
+  display: flex;
+  padding: 5px;
+  gap: 5px;
+  background-color: white;
+  /* border-radius: 5px; */
+  /* margin: 1px; */
+}
+
+.dialogItem:hover{
+  background-color: rgb(246, 246, 246);
+}
+
+.dialogItemActive{
+  /* border: 2px solid rgb(202, 203, 223); */
+  background-color: rgb(246, 246, 246);
+}

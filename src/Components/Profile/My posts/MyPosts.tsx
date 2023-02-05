@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActionType, addPostActionCreator, changeNewPostTextActionCreator, PostType } from '../../../redux/testState';
+import { ActionTypes, addPostActionCreator, changeNewPostTextActionCreator, PostType } from '../../../redux/testState';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
@@ -8,7 +8,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 type MyPostsPropsType = {
   posts: Array<PostType>
   postText: string
-  dispatch: (action: ActionType) => void;
+  dispatch: (action: ActionTypes) => void;
 }
 
 

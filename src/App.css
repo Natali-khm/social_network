@@ -6,9 +6,13 @@ font-family: 'Montserrat', sans-serif;
   display: grid;
   grid-template-columns: 2fr 12fr;
   grid-template-rows: 60px 1fr;
+  min-height: 600px;
 }
 
 .app-wrapper-content{
   grid-row: 2/3;
   grid-column: 2/3;
+  background-color: rgb(215, 225, 244);
+  /* padding-top: 20px; */
+  /* border: 2px solid blue; */
 }

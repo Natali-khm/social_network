@@ -4,12 +4,12 @@ import Dialogs from "./Components/Dialogs/Dialogs";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
-import { ActionType, TestStateType } from "./redux/testState";
+import { ActionTypes, TestStateType } from "./redux/testState";
 
 
 export type AppPropsType = {
   state: TestStateType;
-  dispatch: (action: ActionType) => void;
+  dispatch: (action: ActionTypes) => void;
 };
 
 const App: React.FC <AppPropsType> = (props) => {

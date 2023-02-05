@@ -1,9 +1,11 @@
 const ADD_POST = 'ADD_POST'
 const CHANGE_NEW_POST_TEXT = 'CHANGE_NEW_POST_TEXT'
 
-export const addPostActionCreator = (): ActionType => ({type: ADD_POST});
+export const addPostActionCreator = () => ({type: ADD_POST} as const);
+export const changeNewPostTextActionCreator = (newText: string) => ({type: CHANGE_NEW_POST_TEXT, newText} as const);
 
-export const changeNewPostTextActionCreator = (newText: string): ActionType => ({type: CHANGE_NEW_POST_TEXT, newText});
+
+export type ActionTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof changeNewPostTextActionCreator>
 
 
 export type DialogType = {
@@ -41,10 +43,7 @@ export type TestStateType = {
   dialogsPage: DialogsPageType;
 };
 
-export type ActionType = {
-  type: 'ADD_POST' | 'CHANGE_NEW_POST_TEXT'
-  newText?: string
-}
+
 
 export type Store = {
   _testState: TestStateType
@@ -53,7 +52,7 @@ export type Store = {
   changeNewPostText: (text: string) => void
   _callSubscriber: () => void
   subscribe: (observer: () => void) => void
-  dispatch: (action: ActionType) => void
+  dispatch: (action: ActionTypes) => void
 }
 
 
@@ -84,7 +83,7 @@ let store = {
   getState(){ return this._testState },
   _callSubscriber: () => {},
   subscribe(observer: () => void) { this._callSubscriber = observer; },
-  dispatch (action: ActionType) {
+  dispatch (action: ActionTypes) {                        ///      action | action
     if (action.type === 'ADD_POST'){ 
         this._testState.profilePage.posts.push({
           id: "3",
@@ -101,6 +100,6 @@ let store = {
   } 
 };
 
-
+  
 
 export default store;
