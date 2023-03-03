@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActionTypes, addPostActionCreator, changeNewPostTextActionCreator, PostType } from '../../../redux/testState';
+import { ActionTypes, addPostAC, updateNewPostTextAC, PostType } from '../../../redux/testState';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
@@ -8,7 +8,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 type MyPostsPropsType = {
   posts: Array<PostType>
   postText: string
-  dispatch: (action: ActionTypes) => void;
+  dispatch: (action: ActionTypes) => void
 }
 
 
@@ -20,13 +20,13 @@ const MyPosts: React.FC <MyPostsPropsType> = (props) => {
   
   const addPost = () => {
     if (newPostElement.current) {
-      props.dispatch(addPostActionCreator())
+      props.dispatch(addPostAC())
     }
   };
 
-  const changeNewPostText = () => {
+  const updateNewPostText = () => {
     if (newPostElement.current) {
-      props.dispatch(changeNewPostTextActionCreator(newPostElement.current.value));
+      props.dispatch(updateNewPostTextAC(newPostElement.current.value));
     }
   };
 
@@ -47,7 +47,7 @@ const MyPosts: React.FC <MyPostsPropsType> = (props) => {
         <textarea ref={newPostElement} 
                   placeholder={'What\'s new?'} 
                   value={props.postText} 
-                  onChange={changeNewPostText}/>
+                  onChange={updateNewPostText}/>
 
         <button onClick={addPost}>Add post</button>
 

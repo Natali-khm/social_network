@@ -1,11 +1,18 @@
 const ADD_POST = 'ADD_POST'
-const CHANGE_NEW_POST_TEXT = 'CHANGE_NEW_POST_TEXT'
+const ADD_MESSAGE = 'ADD_MESSAGE'
+const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
 
-export const addPostActionCreator = () => ({type: ADD_POST} as const);
-export const changeNewPostTextActionCreator = (newText: string) => ({type: CHANGE_NEW_POST_TEXT, newText} as const);
+export const addPostAC = () => ({type: ADD_POST} as const);
+export const addMessageAC = () => ({type: ADD_MESSAGE} as const);
+export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const);
+export const updateNewMessageTextAC = (newText: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText} as const);
 
 
-export type ActionTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof changeNewPostTextActionCreator>
+export type ActionTypes = ReturnType<typeof addPostAC> 
+                        | ReturnType<typeof updateNewPostTextAC> 
+                        | ReturnType<typeof updateNewMessageTextAC>
+                        | ReturnType<typeof addMessageAC>
 
 
 export type DialogType = {
@@ -27,8 +34,9 @@ export type PostType = {
 
 
 export type DialogsPageType = {
-  messages: Array<MessageType>;
-  dialogs: Array<DialogType>;
+  messages: Array<MessageType>
+  dialogs: Array<DialogType>
+  newMessageText: string
 };
 
 export type ProfilePageType = {
@@ -36,27 +44,22 @@ export type ProfilePageType = {
   postText: string;
 };
 
-
-
 export type TestStateType = {
   profilePage: ProfilePageType;
   dialogsPage: DialogsPageType;
 };
 
 
-
 export type Store = {
-  _testState: TestStateType
-  getState: () => TestStateType
-  addPostText: () => void
-  changeNewPostText: (text: string) => void
-  _callSubscriber: () => void
-  subscribe: (observer: () => void) => void
-  dispatch: (action: ActionTypes) => void
+  _testState:      TestStateType
+  getState:        () => TestStateType
+  _callSubscriber: (state: TestStateType) => void
+  subscribe:       (observer: (state: TestStateType) => void) => void
+  dispatch:        (action: ActionTypes) => void
 }
 
 
-let store = {
+let store: Store = {
   _testState: {
     profilePage: {
       posts: [
@@ -78,25 +81,43 @@ let store = {
         { id: "3", name: "Denis" },
         { id: "4", name: "Liana" },
       ],
+      newMessageText: ''
     },
   },
-  getState(){ return this._testState },
+  getState (){ return this._testState },
   _callSubscriber: () => {},
-  subscribe(observer: () => void) { this._callSubscriber = observer; },
-  dispatch (action: ActionTypes) {                        ///      action | action
-    if (action.type === 'ADD_POST'){ 
-        this._testState.profilePage.posts.push({
-          id: "3",
-          message: this._testState.profilePage.postText,
-          likesCount: "0",
-        });
-        this._testState.profilePage.postText = "";
-        this._callSubscriber();      
-     }
-    if (action.type === 'CHANGE_NEW_POST_TEXT'){
-          if (action.newText) { this._testState.profilePage.postText = action.newText;}
-          this._callSubscriber();
+  subscribe (observer) { this._callSubscriber = observer },
+  dispatch (action: ActionTypes) { 
+
+    if (action.type === ADD_POST){ 
+
+      this._testState.profilePage.posts.push({
+        id: "3",
+        message: this._testState.profilePage.postText,
+        likesCount: "0",
+      });
+
+      this._testState.profilePage.postText = "";
     }
+
+    if (action.type === UPDATE_NEW_POST_TEXT){
+      if (action.newText) {this._testState.profilePage.postText = action.newText}
+    }
+
+    if (action.type === UPDATE_NEW_MESSAGE_TEXT){
+      this._testState.dialogsPage.newMessageText = action.newText
+    }
+
+    if (action.type === ADD_MESSAGE) {
+      this._testState.dialogsPage.messages.push({
+        id: "5",
+        message: this._testState.dialogsPage.newMessageText,
+      })
+
+      this._testState.dialogsPage.newMessageText = "";
+    }
+    
+    this._callSubscriber(this.getState());
   } 
 };
 

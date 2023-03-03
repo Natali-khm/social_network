@@ -4,11 +4,14 @@ import styles from './Profile.module.css'
 import { ActionTypes, ProfilePageType } from "../../redux/testState";
 
 export type PostsPropsType = {
+
   profilePage: ProfilePageType
-  dispatch: (action: ActionTypes) => void;
+  dispatch:    (action: ActionTypes) => void;
+
 }
 
 const Profile: React.FC<PostsPropsType> = (props) => {
+  
   return (
     <div className={styles.profileBlock}>
       <ProfileInfo />

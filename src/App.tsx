@@ -13,13 +13,16 @@ export type AppPropsType = {
 };
 
 const App: React.FC <AppPropsType> = (props) => {
+
   return (
     <div className="app-wrapper">
       <Header />
       <Navbar />
       <div className="app-wrapper-content">
         <Switch>
-          <Route path="/dialogs"><Dialogs dialogsPage={props.state.dialogsPage}/></Route>
+          <Route path="/dialogs"><Dialogs dialogsPage={props.state.dialogsPage}                             
+                                          dispatch = {props.dispatch}
+                                          /></Route>
           <Route path="/news">news</Route>
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>
