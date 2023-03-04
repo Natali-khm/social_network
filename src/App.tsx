@@ -27,9 +27,9 @@ const App: React.FC <AppPropsType> = (props) => {
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>
           <Route path="/"><Profile 
-                            profilePage = {props.state.profilePage} 
-                            dispatch = {props.dispatch}
-                            /></Route>
+                              profilePage = {props.state.profilePage} 
+                              dispatch = {props.dispatch}
+                          /></Route>
         </Switch>
       </div>
     </div>

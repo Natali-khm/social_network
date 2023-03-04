@@ -2,7 +2,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import store, { TestStateType } from "./redux/testState";
+import { TestStateType } from "./redux/testState";
+import store from "./redux/redux_store";
 
 
 let renderApp = (state: TestStateType) => ReactDOM.render(
@@ -15,4 +16,4 @@ let renderApp = (state: TestStateType) => ReactDOM.render(
 
 renderApp(store.getState())
 
-store.subscribe(renderApp) //  ()=>renderApp(store.getState())
+store.subscribe(()=>renderApp(store.getState())) 

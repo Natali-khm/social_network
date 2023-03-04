@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { KeyboardEvent } from 'react'
 import { ActionTypes, addPostAC, updateNewPostTextAC, PostType } from '../../../redux/testState';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
@@ -32,9 +32,14 @@ const MyPosts: React.FC <MyPostsPropsType> = (props) => {
 
   const postsForRender = props.posts
         .map(post => ( <Post message={post.message} likesCount={post.likesCount} key={post.id} /> ))
-        .reverse();
 
   const [listRef] = useAutoAnimate<HTMLUListElement>() 
+
+  const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter'){
+      addPost()
+    }
+  }
 
   return (
 
@@ -47,7 +52,9 @@ const MyPosts: React.FC <MyPostsPropsType> = (props) => {
         <textarea ref={newPostElement} 
                   placeholder={'What\'s new?'} 
                   value={props.postText} 
-                  onChange={updateNewPostText}/>
+                  onChange={updateNewPostText}
+                  onKeyDown={onEnter}
+                  />
 
         <button onClick={addPost}>Add post</button>
 
