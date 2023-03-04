@@ -1,8 +1,9 @@
 import React, { KeyboardEvent } from 'react'
-import { ActionTypes, addPostAC, updateNewPostTextAC, PostType } from '../../../redux/testState';
+import { ActionTypes, PostType } from '../../../redux/testState';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { addPostAC, updateNewPostTextAC } from '../../../redux/profile_reducer';
 
 
 type MyPostsPropsType = {

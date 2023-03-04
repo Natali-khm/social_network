@@ -30,6 +30,7 @@
     box-shadow: 0px 0px 2px 1px rgba(29, 33, 38, 0.1);
     color: white;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .postsBlock{

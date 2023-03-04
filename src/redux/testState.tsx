@@ -1,12 +1,5 @@
-import { ADD_MESSAGE, dialogsReducer, UPDATE_NEW_MESSAGE_TEXT } from "./dialogs_reducer";
-import { ADD_POST, profileReducer, UPDATE_NEW_POST_TEXT } from "./profile_reducer";
-
-
-export const addPostAC = () => ({type: ADD_POST} as const);
-export const addMessageAC = () => ({type: ADD_MESSAGE} as const);
-export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const);
-export const updateNewMessageTextAC = (newText: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText} as const);
-
+import { addMessageAC, ADD_MESSAGE, dialogsReducer, updateNewMessageTextAC, UPDATE_NEW_MESSAGE_TEXT } from "./dialogs_reducer";
+import { addPostAC, ADD_POST, profileReducer, updateNewPostTextAC, UPDATE_NEW_POST_TEXT } from "./profile_reducer";
 
 export type ActionTypes = ReturnType<typeof addPostAC> 
                         | ReturnType<typeof updateNewPostTextAC> 

@@ -1,6 +1,8 @@
-import { ActionTypes, addPostAC, ProfilePageType, updateNewMessageTextAC } from "./testState";
+import { ActionTypes, ProfilePageType } from "./testState";
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
+export const addPostAC = () => ({type: ADD_POST} as const);
+export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const);
 
 const initialState = {
     posts: [

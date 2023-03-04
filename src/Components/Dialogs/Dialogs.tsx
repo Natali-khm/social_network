@@ -1,5 +1,6 @@
 import { ChangeEvent, KeyboardEvent } from "react";
-import { ActionTypes, addMessageAC, DialogsPageType, DialogType, MessageType, updateNewMessageTextAC } from "../../redux/testState";
+import { addMessageAC, updateNewMessageTextAC } from "../../redux/dialogs_reducer";
+import { ActionTypes, DialogsPageType, DialogType, MessageType } from "../../redux/testState";
 import DialogItem from "./DialogItem/DialogItem";
 import styles from "./Dialogs.module.css";
 import MessageItem from "./MessageItem/MessageItem";
