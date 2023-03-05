@@ -6,22 +6,22 @@ import styles from "./Dialogs.module.css";
 import MessageItem from "./MessageItem/MessageItem";
 
 type DialogsPropsType = {
-  dialogsPage: DialogsPageType
-  dispatch: (action: ActionTypes) => void
+  dialogs: Array<DialogType>
+  messages: Array<MessageType>
+  newMessageText: string
+  changeMessage: (newMessageText: string) => void
+  addMessage: () => void
+  onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => void
 }
 
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-  const changeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.dispatch(updateNewMessageTextAC(e.currentTarget.value))
+  const changeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.changeMessage(e.currentTarget.value)
 
-  const addMessageHandler = () => props.dispatch(addMessageAC())
+  const addMessageHandler = () => props.addMessage()
 
-  const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter'){
-      addMessageHandler()
-    }
-  } 
+  const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => props.onEnter(e)
   
 
   return (
@@ -30,22 +30,23 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
       {/* dialogs */}
       <ul className={styles.dialogsItems}>
-        {props.dialogsPage.dialogs.map((dialog: DialogType) => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />)}
+        {props.dialogs.map((dialog: DialogType) => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />)}
       </ul>
 
       {/* messages */}
       <div className={styles.messages}>
         <div>
-          {props.dialogsPage.messages.map((message: MessageType) => 
+          {props.messages.map((message: MessageType) => 
                   <MessageItem id={message.id} 
-                               message = {message.message} 
+                               message={message.message} 
                                key={message.id}
                   />)}
         </div>
-        <div className={styles.inputBlock}>
+
+        <div className = {styles.inputBlock}>
           <textarea placeholder = "Enter your message..."
                     className = {styles.textArea} 
-                    value = {props.dialogsPage.newMessageText} 
+                    value = {props.newMessageText} 
                     onChange = {changeMessageHandler} 
                     onKeyDown = {onEnter}>
           </textarea>

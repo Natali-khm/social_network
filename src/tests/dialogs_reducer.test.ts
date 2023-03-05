@@ -19,7 +19,7 @@ test("should add correct message", () => {
   const endState = dialogsReducer(startState, addMessageAC());
 
   expect(endState.messages.length).toBe(5);
-  expect(endState.messages[0].id).toBe("5");
+  expect(endState.messages[4].id).toBe("5");
 });
 
 test("should update new message text", () => {

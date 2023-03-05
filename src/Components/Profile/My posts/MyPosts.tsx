@@ -1,15 +1,16 @@
 import React, { KeyboardEvent } from 'react'
-import { ActionTypes, PostType } from '../../../redux/testState';
+import { PostType } from '../../../redux/testState';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { addPostAC, updateNewPostTextAC } from '../../../redux/profile_reducer';
 
 
 type MyPostsPropsType = {
   posts: Array<PostType>
   postText: string
-  dispatch: (action: ActionTypes) => void
+  onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => void
+  updateNewPostText: (newPostText: string) => void
+  addPost: () => void
 }
 
 
@@ -19,28 +20,21 @@ const MyPosts: React.FC <MyPostsPropsType> = (props) => {
 
   let newPostElement = React.createRef<HTMLTextAreaElement>();
   
-  const addPost = () => {
-    if (newPostElement.current) {
-      props.dispatch(addPostAC())
-    }
-  };
+  const addPost = () => props.addPost()
 
   const updateNewPostText = () => {
     if (newPostElement.current) {
-      props.dispatch(updateNewPostTextAC(newPostElement.current.value));
+      props.updateNewPostText(newPostElement.current.value);
     }
   };
+  
+  const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => props.onEnter(e)
 
   const postsForRender = props.posts
         .map(post => ( <Post message={post.message} likesCount={post.likesCount} key={post.id} /> ))
 
   const [listRef] = useAutoAnimate<HTMLUListElement>() 
 
-  const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter'){
-      addPost()
-    }
-  }
 
   return (
 

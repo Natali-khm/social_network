@@ -1,7 +1,7 @@
-import MyPosts from "./My posts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import styles from './Profile.module.css'
 import { ActionTypes, ProfilePageType } from "../../redux/testState";
+import MyPostsContainer from "./My posts/MyPostsContainer";
 
 export type PostsPropsType = {
 
@@ -15,7 +15,7 @@ const Profile: React.FC<PostsPropsType> = (props) => {
   return (
     <div className={styles.profileBlock}>
       <ProfileInfo />
-      <MyPosts posts={props.profilePage.posts} 
+      <MyPostsContainer posts={props.profilePage.posts} 
                postText = {props.profilePage.postText} 
                dispatch = {props.dispatch}
                />

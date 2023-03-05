@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import Dialogs from "./Components/Dialogs/Dialogs";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
@@ -20,15 +20,14 @@ const App: React.FC <AppPropsType> = (props) => {
       <Navbar />
       <div className="app-wrapper-content">
         <Switch>
-          <Route path="/dialogs"><Dialogs dialogsPage={props.state.dialogsPage}                             
-                                          dispatch = {props.dispatch}
+          <Route path="/dialogs"><DialogsContainer dialogsPage={props.state.dialogsPage}                             
+                                                   dispatch = {props.dispatch}
                                           /></Route>
           <Route path="/news">news</Route>
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>
-          <Route path="/"><Profile 
-                              profilePage = {props.state.profilePage} 
-                              dispatch = {props.dispatch}
+          <Route path="/"><Profile profilePage = {props.state.profilePage} 
+                                   dispatch = {props.dispatch}
                           /></Route>
         </Switch>
       </div>
