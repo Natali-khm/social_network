@@ -42,51 +42,51 @@ export type TestStateType = {
 };
 
 
-export type Store = {
-  _testState:      TestStateType
+export type StoreType = {
+  _state:      TestStateType
   getState:        () => TestStateType
-  _callSubscriber: (state: TestStateType) => void
+  _rerender: (state: TestStateType) => void
   subscribe:       (observer: (state: TestStateType) => void) => void
   dispatch:        (action: ActionTypes) => void
 }
 
 
-// let store: Store = {
-//   _testState: {
-//     profilePage: {
-//       posts: [
-//         { id: "1", message: "Hi", likesCount: "1" },
-//         { id: "2", message: "Bye", likesCount: "0" },
-//       ],
-//       postText: "",
-//     },
-//     dialogsPage: {
-//       messages: [
-//         { id: "1", message: "Hello" },
-//         { id: "2", message: "Whats up" },
-//         { id: "3", message: "What have you been up to?" },
-//         { id: "4", message: "I have been abroad" },
-//       ],
-//       dialogs: [
-//         { id: "1", name: "Katya" },
-//         { id: "2", name: "Marina" },
-//         { id: "3", name: "Denis" },
-//         { id: "4", name: "Liana" },
-//       ],
-//       newMessageText: ''
-//     },
-//   },
-//   getState (){ return this._testState },
-//   _callSubscriber: () => {},
-//   subscribe (observer) { this._callSubscriber = observer },
-//   dispatch (action: ActionTypes) { 
+let store: StoreType = {
+  _state: {
+    profilePage: {
+      posts: [
+        { id: "1", message: "Hi", likesCount: "1" },
+        { id: "2", message: "Bye", likesCount: "0" },
+      ],
+      postText: "",
+    },
+    dialogsPage: {
+      messages: [
+        { id: "1", message: "Hello" },
+        { id: "2", message: "Whats up" },
+        { id: "3", message: "What have you been up to?" },
+        { id: "4", message: "I have been abroad" },
+      ],
+      dialogs: [
+        { id: "1", name: "Katya" },
+        { id: "2", name: "Marina" },
+        { id: "3", name: "Denis" },
+        { id: "4", name: "Liana" },
+      ],
+      newMessageText: ''
+    },
+  },
+  getState (){ return this._state },
+  _rerender: () => {},
+  subscribe (observer) { this._rerender = observer },
+  dispatch (action: ActionTypes) { 
 
-//     this._testState.profilePage = profileReducer(this._testState.profilePage, action)
-//     this._testState.dialogsPage = dialogsReducer(this._testState.dialogsPage, action)
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
-//     this._callSubscriber(this.getState());
-//   } 
-// };
+    this._rerender(this.getState());
+  } 
+};
 
   
 

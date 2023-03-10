@@ -7,12 +7,12 @@ import Profile from "./Components/Profile/Profile";
 import { ActionTypes, TestStateType } from "./redux/testState";
 
 
-export type AppPropsType = {
-  state: TestStateType;
-  dispatch: (action: ActionTypes) => void;
-};
+// export type AppPropsType = {
+//   state: TestStateType;
+//   dispatch: (action: ActionTypes) => void;
+// };
 
-const App: React.FC <AppPropsType> = (props) => {
+const App = () => {
 
   return (
     <div className="app-wrapper">
@@ -20,15 +20,11 @@ const App: React.FC <AppPropsType> = (props) => {
       <Navbar />
       <div className="app-wrapper-content">
         <Switch>
-          <Route path="/dialogs"><DialogsContainer dialogsPage={props.state.dialogsPage}                             
-                                                   dispatch = {props.dispatch}
-                                          /></Route>
+          <Route path="/dialogs"><DialogsContainer/></Route>
           <Route path="/news">news</Route>
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>
-          <Route path="/"><Profile profilePage = {props.state.profilePage} 
-                                   dispatch = {props.dispatch}
-                          /></Route>
+          <Route path="/"><Profile/></Route>
         </Switch>
       </div>
     </div>

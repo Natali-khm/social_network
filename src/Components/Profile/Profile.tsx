@@ -3,22 +3,17 @@ import styles from './Profile.module.css'
 import { ActionTypes, ProfilePageType } from "../../redux/testState";
 import MyPostsContainer from "./My posts/MyPostsContainer";
 
-export type PostsPropsType = {
+// export type PostsPropsType = {
+//   profilePage: ProfilePageType
+//   dispatch:    (action: ActionTypes) => void;
+// }
 
-  profilePage: ProfilePageType
-  dispatch:    (action: ActionTypes) => void;
-
-}
-
-const Profile: React.FC<PostsPropsType> = (props) => {
+const Profile = () => {
   
   return (
     <div className={styles.profileBlock}>
       <ProfileInfo />
-      <MyPostsContainer posts={props.profilePage.posts} 
-               postText = {props.profilePage.postText} 
-               dispatch = {props.dispatch}
-               />
+      <MyPostsContainer/>
     </div>
   );
 };
