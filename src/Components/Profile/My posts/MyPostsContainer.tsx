@@ -74,10 +74,7 @@ const mapStateToProps = (state: RootState): MapStateToPropsType => ({
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
   addPost: () => dispatch(addPostAC()),
   updateNewPostText: (newPostText: string) => dispatch(updateNewPostTextAC(newPostText)),
-  onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && this) {
-      dispatch(addPostAC())
-    }
+  onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => { if (e.key === "Enter") { dispatch(addPostAC()) }
 }})
 
 

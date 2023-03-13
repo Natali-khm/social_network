@@ -1,9 +1,26 @@
-import { ActionTypes, DialogsPageType } from "./testState";
+import { ActionTypes } from "./testState";
 export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
 
 export const addMessageAC = () => ({type: ADD_MESSAGE} as const);
 export const updateNewMessageTextAC = (newText: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText} as const);
+
+type DialogType = {
+  id: string;
+  name: string;
+};
+
+type MessageType = {
+  id: string;
+  message: string;
+};
+
+export type DialogsPageType = {
+  messages: Array<MessageType>
+  dialogs: Array<DialogType>
+  newMessageText: string
+};
+
 
 const initialState = {
   messages: [
@@ -21,7 +38,7 @@ const initialState = {
   newMessageText: ''
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTypes) => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTypes): DialogsPageType => {
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage = {

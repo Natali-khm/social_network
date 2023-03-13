@@ -3,16 +3,17 @@ import { addMessageAC, updateNewMessageTextAC } from "../../redux/dialogs_reduce
 import { ActionTypes, DialogsPageType, DialogType, MessageType } from "../../redux/testState";
 import DialogItem from "./DialogItem/DialogItem";
 import styles from "./Dialogs.module.css";
+import { DialogsPropsType } from "./DialogsContainer";
 import MessageItem from "./MessageItem/MessageItem";
 
-type DialogsPropsType = {
-  dialogs: Array<DialogType>
-  messages: Array<MessageType>
-  newMessageText: string
-  changeMessage: (newMessageText: string) => void
-  addMessage: () => void
-  onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => void
-}
+// type DialogsPropsType = {
+//   dialogs: Array<DialogType>
+//   messages: Array<MessageType>
+//   newMessageText: string
+//   changeMessage: (newMessageText: string) => void
+//   addMessage: () => void
+//   onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => void
+// }
 
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -30,13 +31,13 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
       {/* dialogs */}
       <ul className={styles.dialogsItems}>
-        {props.dialogs.map((dialog: DialogType) => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />)}
+        {props.dialogsPage.dialogs.map((dialog: DialogType) => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />)}
       </ul>
 
       {/* messages */}
       <div className={styles.messages}>
         <div>
-          {props.messages.map((message: MessageType) => 
+          {props.dialogsPage.messages.map((message: MessageType) => 
                   <MessageItem id={message.id} 
                                message={message.message} 
                                key={message.id}
@@ -46,7 +47,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
         <div className = {styles.inputBlock}>
           <textarea placeholder = "Enter your message..."
                     className = {styles.textArea} 
-                    value = {props.newMessageText} 
+                    value = {props.dialogsPage.newMessageText} 
                     onChange = {changeMessageHandler} 
                     onKeyDown = {onEnter}>
           </textarea>

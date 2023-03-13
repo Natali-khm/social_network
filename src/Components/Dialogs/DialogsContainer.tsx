@@ -1,6 +1,9 @@
 import { ChangeEvent, KeyboardEvent } from "react";
-import { addMessageAC, updateNewMessageTextAC } from "../../redux/dialogs_reducer";
-import { ActionTypes, DialogsPageType, DialogType, MessageType } from "../../redux/testState";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { addMessageAC, updateNewMessageTextAC, DialogsPageType } from "../../redux/dialogs_reducer";
+import { RootState } from "../../redux/redux_store";
+import { ActionTypes, DialogType, MessageType } from "../../redux/testState";
 import { StoreContext } from "../../StoreContext";
 import DialogItem from "./DialogItem/DialogItem";
 import Dialogs from "./Dialogs";
@@ -13,38 +16,68 @@ import MessageItem from "./MessageItem/MessageItem";
 // }
 
 
-const DialogsContainer = () => {
-  return (
-    <StoreContext.Consumer>
-      {(store) => {
-        if (store) {
+// const DialogsContainer = () => {
+//   return (
+//     <StoreContext.Consumer>
+//       {(store) => {
+//         if (store) {
 
-          const dialogsPage = store.getState().dialogsPage
-          const changeMessage = (newMessageText: string) =>
-            store.dispatch(updateNewMessageTextAC(newMessageText));
+//           const dialogsPage = store.getState().dialogsPage
+//           const changeMessage = (newMessageText: string) =>
+//             store.dispatch(updateNewMessageTextAC(newMessageText));
 
-          const addMessage = () => store.dispatch(addMessageAC());
+//           const addMessage = () => store.dispatch(addMessageAC());
 
-          const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-            if (e.key === "Enter") {
-              addMessage();
-            }
-          };
+//           const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+//             if (e.key === "Enter") {
+//               addMessage();
+//             }
+//           };
 
-          return (
-            <Dialogs
-              dialogs={dialogsPage.dialogs}
-              messages={dialogsPage.messages}
-              newMessageText={ dialogsPage.newMessageText}
-              changeMessage={changeMessage}
-              addMessage={addMessage}
-              onEnter={onEnter}
-            />
-          );
-        }
-      }}
-    </StoreContext.Consumer>
-  );
-};
+//           return (
+//             <Dialogs
+//               dialogs={dialogsPage.dialogs}
+//               messages={dialogsPage.messages}
+//               newMessageText={ dialogsPage.newMessageText}
+//               changeMessage={changeMessage}
+//               addMessage={addMessage}
+//               onEnter={onEnter}
+//             />
+//           );
+//         }
+//       }}
+//     </StoreContext.Consumer>
+//   );
+// };
+
+
+type MapStateToPropsType = {
+  dialogsPage: DialogsPageType
+}
+
+type MapDispatchToPropsType = {
+  changeMessage: (newMessageText: string) => void
+  addMessage: () => void
+  onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => void
+}
+
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+
+
+const mapStateToProps = (state: RootState): MapStateToPropsType => ({
+  dialogsPage: state.dialogsPage,
+})
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
+  changeMessage: (newMessageText: string) => dispatch(updateNewMessageTextAC(newMessageText)),
+  addMessage: () => dispatch(addMessageAC()),
+  onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => { if (e.key === "Enter") { 
+    dispatch(addMessageAC()) }}
+})
+
+
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default DialogsContainer;

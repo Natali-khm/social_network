@@ -3,10 +3,6 @@ import styles from './Profile.module.css'
 import { ActionTypes } from "../../redux/testState";
 import MyPostsContainer from "./My posts/MyPostsContainer";
 
-// export type PostsPropsType = {
-//   profilePage: ProfilePageType
-//   dispatch:    (action: ActionTypes) => void;
-// }
 
 const Profile = () => {
   
