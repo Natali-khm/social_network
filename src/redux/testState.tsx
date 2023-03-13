@@ -17,12 +17,11 @@ export type MessageType = {
   message: string;
 };
 
-export type PostType = {
+type PostType = {
   id: string;
   message: string;
   likesCount: string;
 };
-
 
 
 export type DialogsPageType = {
@@ -31,7 +30,7 @@ export type DialogsPageType = {
   newMessageText: string
 };
 
-export type ProfilePageType = {
+type ProfilePageType = {
   posts: Array<PostType>;
   postText: string;
 };
@@ -44,10 +43,10 @@ export type TestStateType = {
 
 export type StoreType = {
   _state:      TestStateType
-  getState:        () => TestStateType
-  _rerender: (state: TestStateType) => void
-  subscribe:       (observer: (state: TestStateType) => void) => void
-  dispatch:        (action: ActionTypes) => void
+  getState:    () => TestStateType
+  _rerender:   (state: TestStateType) => void
+  subscribe:   (observer: (state: TestStateType) => void) => void
+  dispatch:    (action: ActionTypes) => void
 }
 
 

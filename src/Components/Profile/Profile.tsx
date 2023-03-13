@@ -1,6 +1,6 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import styles from './Profile.module.css'
-import { ActionTypes, ProfilePageType } from "../../redux/testState";
+import { ActionTypes } from "../../redux/testState";
 import MyPostsContainer from "./My posts/MyPostsContainer";
 
 // export type PostsPropsType = {

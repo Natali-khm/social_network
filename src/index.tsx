@@ -5,17 +5,18 @@ import { BrowserRouter } from "react-router-dom";
 import { StoreType, TestStateType } from "./redux/testState";
 import { store } from "./redux/redux_store";
 import { StoreContext } from "./StoreContext";
+import { Provider } from "react-redux";
 
 
-let renderApp = (store: StoreType) => ReactDOM.render(
+let renderApp = () => ReactDOM.render(
   <BrowserRouter>
-    <StoreContext.Provider value = {store}>
+    <Provider store = {store}>
       <App/>
-    </StoreContext.Provider>
+    </Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );
 
-renderApp(store)
+renderApp()
 
-store.subscribe(()=>renderApp(store)) 
+store.subscribe(()=>renderApp()) 

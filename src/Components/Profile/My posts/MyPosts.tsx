@@ -1,18 +1,9 @@
 import React, { KeyboardEvent } from 'react'
-import { PostType } from '../../../redux/testState';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-
-
-type MyPostsPropsType = {
-  posts: Array<PostType>
-  postText: string
-  onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => void
-  updateNewPostText: (newPostText: string) => void
-  addPost: () => void
-}
-
+import { PostType, ProfilePageType } from '../../../redux/profile_reducer';
+import { MyPostsPropsType } from './MyPostsContainer';
 
 
 
@@ -30,7 +21,7 @@ const MyPosts: React.FC <MyPostsPropsType> = (props) => {
   
   const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => props.onEnter(e)
 
-  const postsForRender = props.posts
+  const postsForRender = props.profilePage.posts
         .map(post => ( <Post message={post.message} likesCount={post.likesCount} key={post.id} /> ))
 
   const [listRef] = useAutoAnimate<HTMLUListElement>() 
@@ -46,7 +37,7 @@ const MyPosts: React.FC <MyPostsPropsType> = (props) => {
 
         <textarea ref={newPostElement} 
                   placeholder={'What\'s new?'} 
-                  value={props.postText} 
+                  value={props.profilePage.postText} 
                   onChange={updateNewPostText}
                   onKeyDown={onEnter}
                   />

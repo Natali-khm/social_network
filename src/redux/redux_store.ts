@@ -9,9 +9,9 @@ const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
 })
 
-type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>
 
-export const store: StoreType = createStore(rootReducer)
+export const store = createStore(rootReducer)
 
 
   

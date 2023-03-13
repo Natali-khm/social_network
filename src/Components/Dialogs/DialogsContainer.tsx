@@ -35,7 +35,7 @@ const DialogsContainer = () => {
             <Dialogs
               dialogs={dialogsPage.dialogs}
               messages={dialogsPage.messages}
-              newMessageText={dialogsPage.newMessageText}
+              newMessageText={ dialogsPage.newMessageText}
               changeMessage={changeMessage}
               addMessage={addMessage}
               onEnter={onEnter}
