@@ -1,0 +1,8 @@
+.userBlock{
+    display: flex;
+    border: 1px solid grey;
+}
+
+.avatar{
+    width: 60px;
+}

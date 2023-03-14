@@ -2,7 +2,6 @@ import React, { KeyboardEvent } from 'react'
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { PostType, ProfilePageType } from '../../../redux/profile_reducer';
 import { MyPostsPropsType } from './MyPostsContainer';
 
 

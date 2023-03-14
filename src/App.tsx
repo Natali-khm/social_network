@@ -4,7 +4,7 @@ import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
-import { ActionTypes, TestStateType } from "./redux/testState";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 
 // export type AppPropsType = {
@@ -21,6 +21,7 @@ const App = () => {
       <div className="app-wrapper-content">
         <Switch>
           <Route path="/dialogs"><DialogsContainer/></Route>
+          <Route path="/users"><UsersContainer/></Route>
           <Route path="/news">news</Route>
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>

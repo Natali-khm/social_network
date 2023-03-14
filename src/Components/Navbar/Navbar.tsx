@@ -8,33 +8,41 @@ import newsfeed from '../../assets/images/icons/newsfeed.svg'
 
 
 const Navbar: React.FC = (): JSX.Element => {
+
+  const linkClassName = (isActive: boolean): string => isActive ? styles.active : styles.inactive
+
   return (
   <nav className={styles.nav}>
 
     <ul className={styles.navList}>
       <li>
-        <NavLink to='/profile' className={(isActive: boolean): string => isActive ? styles.active : styles.inactive}>
+        <NavLink to='/profile' className={linkClassName}>
           <div className={styles.imgContainer}><img src={profileIcon}/></div><span>Profile</span> 
         </NavLink> 
       </li>
       <li>
-        <NavLink to='/dialogs' className={(isActive: boolean): string => isActive ? styles.active : styles.inactive}>
-        <div className={styles.imgContainer}><img src={messageIcon}/></div><span>Messages</span> 
+        <NavLink to='/dialogs' className={linkClassName}>
+          <div className={styles.imgContainer}><img src={messageIcon}/></div><span>Messages</span> 
         </NavLink>
       </li>
       <li>
-        <NavLink to='/news' className={(isActive: boolean): string => isActive ? styles.active : styles.inactive}>
-        <div className={styles.imgContainer}><img src={newsfeed}/></div><span>News</span> 
+        <NavLink to='/users' className={linkClassName}>
+          <div className={styles.imgContainer}><img src={messageIcon}/></div><span>Users</span> 
         </NavLink>
       </li>
       <li>
-        <NavLink to='/music' className={(isActive: boolean): string => isActive ? styles.active : styles.inactive}>
-        <div className={styles.imgContainer}><img src={musicIcon}/></div><span>Music</span> 
+        <NavLink to='/news' className={linkClassName}>
+          <div className={styles.imgContainer}><img src={newsfeed}/></div><span>News</span> 
         </NavLink>
       </li>
       <li>
-        <NavLink to='/settings' className={(isActive: boolean): string => isActive ? styles.active : styles.inactive}>
-        <div className={styles.imgContainer}><img src={settingsIcon}/></div><span>Settings</span> 
+        <NavLink to='/music' className={linkClassName}>
+          <div className={styles.imgContainer}><img src={musicIcon}/></div><span>Music</span> 
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to='/settings' className={linkClassName}>
+          <div className={styles.imgContainer}><img src={settingsIcon}/></div><span>Settings</span> 
         </NavLink>
       </li>
     </ul>

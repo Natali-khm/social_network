@@ -1,8 +1,19 @@
-import { ActionTypes } from "./testState";
+import { addMessageAC, updateNewMessageTextAC } from "./dialogs_reducer";
+import { followAC, setUsersAC, unfollowAC } from "./users_reducer";
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 export const addPostAC = () => ({type: ADD_POST} as const);
 export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const);
+
+export type ActionTypes = ReturnType<typeof addPostAC> 
+                        | ReturnType<typeof updateNewPostTextAC> 
+                        | ReturnType<typeof updateNewMessageTextAC>
+                        | ReturnType<typeof addMessageAC>
+                        | ReturnType<typeof followAC>
+                        | ReturnType<typeof unfollowAC>
+                        | ReturnType<typeof setUsersAC>
+
+
 
 export type PostType = {
     id: string;

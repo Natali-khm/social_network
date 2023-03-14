@@ -1,4 +1,5 @@
-import { ActionTypes } from "./testState";
+import { ActionTypes } from "./profile_reducer";
+
 export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
 

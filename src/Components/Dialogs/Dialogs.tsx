@@ -1,19 +1,10 @@
 import { ChangeEvent, KeyboardEvent } from "react";
-import { addMessageAC, updateNewMessageTextAC } from "../../redux/dialogs_reducer";
-import { ActionTypes, DialogsPageType, DialogType, MessageType } from "../../redux/testState";
+import { DialogType, MessageType } from "../../redux/testState";
 import DialogItem from "./DialogItem/DialogItem";
 import styles from "./Dialogs.module.css";
 import { DialogsPropsType } from "./DialogsContainer";
 import MessageItem from "./MessageItem/MessageItem";
 
-// type DialogsPropsType = {
-//   dialogs: Array<DialogType>
-//   messages: Array<MessageType>
-//   newMessageText: string
-//   changeMessage: (newMessageText: string) => void
-//   addMessage: () => void
-//   onEnter: (e: KeyboardEvent<HTMLTextAreaElement>) => void
-// }
 
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
