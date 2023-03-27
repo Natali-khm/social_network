@@ -9,11 +9,14 @@ export const setUsersAC = (users: any) => ({type: SET_USERS, users} as const);  
 
 export type UserType = {
     id: string
-    fullName: string
+    name: string
     status: string
     location: {country: string, city: string}
     followed: boolean
-    photoUrl: string
+    photos: {
+        small: string
+        large: string
+    }
 };
 
 export type UsersPageType = {

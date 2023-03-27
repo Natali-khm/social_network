@@ -19,4 +19,3 @@ let renderApp = () => ReactDOM.render(
 
 renderApp()
 
-store.subscribe(()=>renderApp()) 

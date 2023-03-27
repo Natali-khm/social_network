@@ -1,8 +1,53 @@
+.container{
+    margin-left: 40px;
+    margin-top: 40px;
+    background-color: white;
+    padding: 20px;
+    max-width: 660px;
+    border-radius: 5px;
+}
+
+.usersBlock{
+
+}
+
 .userBlock{
     display: flex;
-    border: 1px solid grey;
+    gap: 20px;
+    padding: 10px;
+    border-bottom: 1px solid rgb(210, 209, 209);
+    /* align-items: flex-end; */
 }
 
 .avatar{
     width: 60px;
+}
+
+.userName{
+    color: #2a5885;
+    font-weight: bold;
+}
+
+.location{
+    margin-left: auto;
+}
+
+.imgBlock{
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nameLocationBlock{
+    border-bottom: 1px solid #000;
+}
+
+.btnFollow{
+    width: 75px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(217, 212, 212);
+    border-radius: 3px;
 }

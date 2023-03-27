@@ -1,40 +1,51 @@
 import { UsersPropsType } from "./UsersContainer"
 import s from "./Users.module.css"
 import userAvatar from "../../assets/images/user_avatar.png";
+import axios from "axios";
+import React from "react";
 
+class Users extends React.Component <UsersPropsType>{
 
-const Users = (props: UsersPropsType) => {
-  if (!props.usersPage.users.length){
-    props.setUsers(
-      [
-        { id: "1", fullName: "Liyana", status: "", location: {country: 'Belarus', city: 'Minsk'}, followed: true, photoUrl: '' },
-        { id: "2", fullName: "Marina", status: "hi", location: {country: 'Belarus', city: 'Mogilev'}, followed: true, photoUrl: '' },
-        { id: "3", fullName: "Nastya", status: "lets go for a walk", location: {country: 'Russia', city: 'Moskow'}, followed: true, photoUrl: '' },
-        { id: "4", fullName: "Alesya", status: "", location: {country: 'Ukraine', city: 'Kiev'}, followed: false, photoUrl: '' },
-      ]
+  constructor(props: UsersPropsType) {
+    super(props);
+      alert("e");
+      axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => this.props.setUsers(response.data.items))
+  }
+
+  
+  render(){
+    return (
+      <div className = {s.container} >
+        <div className = {s.usersBlock}>
+
+            {this.props.usersPage.users.map(u => (
+                <div className = {s.userBlock} key={u.id}>
+                  <div className={s.avatarBlock}>
+                    <div className={s.imgBlock}>
+                      <img src={u.photos.small ? u.photos.small : userAvatar} className = {s.avatar}/>
+                      <div>{u.followed 
+                            ? <button onClick={() => this.props.unfollow(u.id)} className = {s.btnFollow}>Unfollow</button> 
+                            : <button onClick={() => this.props.follow(u.id)} className = {s.btnFollow}>Follow</button> 
+                            }</div>
+                    </div>
+                  </div>
+                    <div>
+                      <div className={s.userName}>{u.name}</div>
+                      <p>{u.status}</p>
+                    </div>
+                    <div className={s.location}>
+                      {/* <div>{u.location.country}</div> */}
+                      {/* <div>{u.location.city}</div> */}
+                    </div>
+                </div>
+            ))}
+
+        </div>
+      </div>
     )
   }
-  
-  return (
-    <div>
-        {props.usersPage.users.map(u => (
-            <div className = {s.userBlock} key={u.id}>
-              <div className={s.avatarBlock}>
-                <img src={u.photoUrl ? u.photoUrl : userAvatar} className = {s.avatar}/>
-                <div>{u.followed 
-                      ? <button onClick={() => props.unfollow(u.id)}>Unfollow</button> 
-                      : <button onClick={() => props.follow(u.id)}>Follow</button> 
-                      }</div>
-              </div>
-              <div>
-                <p>{u.fullName}</p>
-                <p>{u.status}</p>
-                <p>{u.location.country}, {u.location.city}</p>
-              </div>
-            </div>
-        ))}
-    </div>
-  )
 }
+
+
 
 export default Users

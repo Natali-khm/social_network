@@ -5,6 +5,7 @@ import profileIcon from '../../assets/images/icons/profile.svg'
 import musicIcon from '../../assets/images/icons/mic.svg'
 import settingsIcon from '../../assets/images/icons/settings.svg'
 import newsfeed from '../../assets/images/icons/newsfeed.svg'
+import happy from '../../assets/images/icons/happy.svg'
 
 
 const Navbar: React.FC = (): JSX.Element => {
@@ -27,7 +28,7 @@ const Navbar: React.FC = (): JSX.Element => {
       </li>
       <li>
         <NavLink to='/users' className={linkClassName}>
-          <div className={styles.imgContainer}><img src={messageIcon}/></div><span>Users</span> 
+          <div className={styles.imgContainer}><img src={happy}/></div><span>Users</span> 
         </NavLink>
       </li>
       <li>
