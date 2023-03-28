@@ -3,6 +3,7 @@ import userAvatar from "../../assets/images/user_avatar.png";
 import axios from "axios";
 import React from "react";
 import { UserType } from "../../redux/users_reducer";
+import { Preloader } from "../common/Preloader";
 
 type UsersPropsType = {
   totalUsersCount: number
@@ -12,7 +13,7 @@ type UsersPropsType = {
   getUsers: (page:number) => void
   follow: (id: string) => void
   unfollow: (id: string) => void
-
+  isFetching: boolean
 }
 
 const Users = (props: UsersPropsType) => {
@@ -52,6 +53,8 @@ const Users = (props: UsersPropsType) => {
             ... <span className = {props.currentPage === pagesCount ? s.selectedPage : ''}
                       onClick = {() => props.getUsers(pagesCount)}>{pagesCount}</span>
         </div>
+
+        {props.isFetching && <Preloader/>}
 
 {/* users */}
         <div className = {s.usersBlock}>
