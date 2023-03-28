@@ -1,34 +1,26 @@
-import { UsersPropsType } from "./UsersContainer"
 import s from "./Users.module.css"
 import userAvatar from "../../assets/images/user_avatar.png";
 import axios from "axios";
 import React from "react";
+import { UserType } from "../../redux/users_reducer";
 
-class Users extends React.Component <UsersPropsType>{
+type UsersPropsType = {
+  totalUsersCount: number
+  pageSize: number
+  currentPage: number
+  users: UserType[]
+  getUsers: (page:number) => void
+  follow: (id: string) => void
+  unfollow: (id: string) => void
 
-  componentDidMount(){
-    const currPage = this.props.currentPage
-    const pageSize = this.props.pageSize
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${pageSize}`)
-           .then(response => {
-             this.props.setUsers(response.data.items)
-             this.props.setTotalUsersCount(response.data.totalCount)
-           })  
-  }
+}
 
-  getUsers = (p: number) => {
-    this.props.setCurrentPage(p)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
-         .then(response => this.props.setUsers(response.data.items)) 
-  }
-  
-  render(){
-
-    const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)    
+const Users = (props: UsersPropsType) => {
+    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)    
 
     let pages;
 
-    switch (this.props.currentPage) {
+    switch (props.currentPage) {
       case 1:
         pages = [1, 2, 3]
         break;
@@ -38,34 +30,40 @@ class Users extends React.Component <UsersPropsType>{
       case pagesCount:
         pages = [1, pagesCount-1]
         break;
+      case pagesCount - 1:
+        pages = [props.currentPage - 1, props.currentPage];
+        break;
       default:
-        pages = [this.props.currentPage - 1, this.props.currentPage, this.props.currentPage + 1];
+        pages = [props.currentPage - 1, props.currentPage, props.currentPage + 1];
         break;
     }
 
     return (
       <div className = {s.container} >
+
+{/* pagination */}
         <div className={s.pageCountBlock}>
           {pages.map(p => 
                 <span key = {p}
-                      className = {this.props.currentPage === p ? s.selectedPage : ''}
-                      onClick = {() => this.getUsers(p)}
+                      className = {props.currentPage === p ? s.selectedPage : ''}
+                      onClick = {() => props.getUsers(p)}
                       >{p} </span>)}
 
-            ... <span className = {this.props.currentPage === pagesCount ? s.selectedPage : ''}
-                      onClick = {() => this.getUsers(pagesCount)}>{pagesCount}</span>
+            ... <span className = {props.currentPage === pagesCount ? s.selectedPage : ''}
+                      onClick = {() => props.getUsers(pagesCount)}>{pagesCount}</span>
         </div>
 
+{/* users */}
         <div className = {s.usersBlock}>
 
-            {this.props.usersPage.users.map(u => (
+            {props.users.map(u => (
                 <div className = {s.userBlock} key={u.id}>
                   <div className={s.avatarBlock}>
                     <div className={s.imgBlock}>
                       <img src={u.photos.small ? u.photos.small : userAvatar} className = {s.avatar}/>
                       <div>{u.followed 
-                            ? <button onClick={() => this.props.unfollow(u.id)} className = {s.btnFollow}>Unfollow</button> 
-                            : <button onClick={() => this.props.follow(u.id)} className = {s.btnFollow}>Follow</button> 
+                            ? <button onClick={() => props.unfollow(u.id)} className = {s.btnFollow}>Unfollow</button> 
+                            : <button onClick={() => props.follow(u.id)} className = {s.btnFollow}>Follow</button> 
                             }</div>
                     </div>
                   </div>
@@ -84,7 +82,9 @@ class Users extends React.Component <UsersPropsType>{
       </div>
     )
   }
-}
+
+
+
 
 
 
