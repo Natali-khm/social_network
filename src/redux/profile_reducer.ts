@@ -9,9 +9,7 @@ export type ActionTypes = ReturnType<typeof addPostAC>
                         | ReturnType<typeof updateNewPostTextAC> 
                         | ReturnType<typeof updateNewMessageTextAC>
                         | ReturnType<typeof addMessageAC>
-                        | ReturnType<typeof followAC>
-                        | ReturnType<typeof unfollowAC>
-                        | ReturnType<typeof setUsersAC>
+
 
 
 

@@ -33,10 +33,14 @@
 }
 
 .imgBlock{
-    width: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.imgBlock img{
+    width: 60px;
+    height: 60px;
 }
 
 .nameLocationBlock{
@@ -50,4 +54,22 @@
     cursor: pointer;
     background-color: rgb(217, 212, 212);
     border-radius: 3px;
+}
+
+.pageCountBlock{
+    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.pageCountBlock span{
+    cursor: pointer;
+    color: grey;
+}
+
+.selectedPage{
+    font-weight: bold;
+    color: rgb(46, 45, 45);
+    font-size: 20px;
 }

@@ -7,13 +7,55 @@ import React from "react";
 class Users extends React.Component <UsersPropsType>{
 
   componentDidMount(){
-      axios.get('https://social-network.samuraijs.com/api/1.0/users')
-           .then(response => this.props.setUsers(response.data.items))    
+    const currPage = this.props.currentPage
+    const pageSize = this.props.pageSize
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currPage}&count=${pageSize}`)
+           .then(response => {
+             this.props.setUsers(response.data.items)
+             this.props.setTotalUsersCount(response.data.totalCount)
+           })  
+  }
+
+  getUsers = (p: number) => {
+    this.props.setCurrentPage(p)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
+         .then(response => this.props.setUsers(response.data.items)) 
   }
   
   render(){
+
+    const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)    
+
+    let pages;
+
+    switch (this.props.currentPage) {
+      case 1:
+        pages = [1, 2, 3]
+        break;
+      case 2:
+        pages = [1, 2, 3]
+        break;
+      case pagesCount:
+        pages = [1, pagesCount-1]
+        break;
+      default:
+        pages = [this.props.currentPage - 1, this.props.currentPage, this.props.currentPage + 1];
+        break;
+    }
+
     return (
       <div className = {s.container} >
+        <div className={s.pageCountBlock}>
+          {pages.map(p => 
+                <span key = {p}
+                      className = {this.props.currentPage === p ? s.selectedPage : ''}
+                      onClick = {() => this.getUsers(p)}
+                      >{p} </span>)}
+
+            ... <span className = {this.props.currentPage === pagesCount ? s.selectedPage : ''}
+                      onClick = {() => this.getUsers(pagesCount)}>{pagesCount}</span>
+        </div>
+
         <div className = {s.usersBlock}>
 
             {this.props.usersPage.users.map(u => (
