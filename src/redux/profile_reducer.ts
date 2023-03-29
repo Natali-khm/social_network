@@ -1,5 +1,4 @@
 import { addMessageAC, updateNewMessageTextAC } from "./dialogs_reducer";
-import { followAC, setUsersAC, unfollowAC } from "./users_reducer";
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 export const addPostAC = () => ({type: ADD_POST} as const);
