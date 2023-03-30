@@ -7,6 +7,7 @@ test("should add correct post", () => {
       { id: "2", message: "Bye", likesCount: "0" },
     ],
     postText: "",
+    profile: null
   };
 
   const endState = profileReducer(startState, addPostAC());
@@ -21,6 +22,7 @@ test("should update new post text", () => {
       { id: "2", message: "Bye", likesCount: "0" },
     ],
     postText: "",
+    profile: null
   };
 
   const endState = profileReducer(startState, updateNewPostTextAC('some text'));

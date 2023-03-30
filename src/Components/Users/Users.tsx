@@ -4,6 +4,7 @@ import axios from "axios";
 import React from "react";
 import { UserType } from "../../redux/users_reducer";
 import { Preloader } from "../common/Preloader";
+import { NavLink } from "react-router-dom";
 
 type UsersPropsType = {
   totalUsersCount: number
@@ -61,26 +62,27 @@ const Users = (props: UsersPropsType) => {
 
             {props.users.map(u => (
                 <div className = {s.userBlock} key={u.id}>
-                  <div className={s.avatarBlock}>
                     <div className={s.imgBlock}>
-                      <img src={u.photos.small ? u.photos.small : userAvatar} className = {s.avatar}/>
-                      <div>{u.followed 
-                            ? <button onClick={() => props.unfollow(u.id)} className = {s.btnFollow}>Unfollow</button> 
-                            : <button onClick={() => props.follow(u.id)} className = {s.btnFollow}>Follow</button> 
-                            }</div>
+                        <div>
+                          <NavLink to={"/profile/" + u.id}>
+                            <img src={u.photos.small ? u.photos.small : userAvatar} className = {s.avatar}/>
+                          </NavLink>
+                        </div>
+                        <div>{u.followed 
+                              ? <button onClick={() => props.unfollow(u.id)} className = {s.btnFollow}>Unfollow</button> 
+                              : <button onClick={() => props.follow(u.id)} className = {s.btnFollow}>Follow</button>}
+                        </div>
                     </div>
-                  </div>
                     <div>
-                      <div className={s.userName}>{u.name}</div>
-                      <p>{u.status}</p>
+                        <div><NavLink to={'/profile' + u.id} className={s.userName}>{u.name}</NavLink></div>
+                        <p>{u.status}</p>
                     </div>
                     <div className={s.location}>
-                      {/* <div>{u.location.country}</div> */}
-                      {/* <div>{u.location.city}</div> */}
+                        {/* <div>{u.location.country}</div> */}
+                        {/* <div>{u.location.city}</div> */}
                     </div>
                 </div>
             ))}
-
         </div>
       </div>
     )

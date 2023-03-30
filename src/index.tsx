@@ -2,9 +2,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { StoreType, TestStateType } from "./redux/testState";
 import { store } from "./redux/redux_store";
-import { StoreContext } from "./StoreContext";
 import { Provider } from "react-redux";
 
 

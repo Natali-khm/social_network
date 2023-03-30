@@ -1,15 +1,18 @@
 import { addMessageAC, updateNewMessageTextAC } from "./dialogs_reducer";
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
+export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 export const addPostAC = () => ({type: ADD_POST} as const);
 export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const);
+export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const);                     // any
+
+//----------------------------------------------------------------------------------------------------------------//
 
 export type ActionTypes = ReturnType<typeof addPostAC> 
                         | ReturnType<typeof updateNewPostTextAC> 
                         | ReturnType<typeof updateNewMessageTextAC>
                         | ReturnType<typeof addMessageAC>
-
-
+                        | ReturnType<typeof setUserProfile>
 
 
 export type PostType = {
@@ -21,7 +24,32 @@ export type PostType = {
 export type ProfilePageType = {
     posts: Array<PostType>;
     postText: string;
+    profile: ProfileType | null
 };
+
+export type ProfileType = {
+    aboutMe: string
+    contacts: {
+      facebook: string
+      website: string
+      vk: string
+      twitter: string
+      instagram: string
+      youtube: string
+      github: string
+      mainLink: string
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: {
+      small: string
+      large: string
+    }
+  }
+
+//----------------------------------------------------------------------------------------------------------------//
 
 const initialState: ProfilePageType = {
     posts: [
@@ -29,6 +57,7 @@ const initialState: ProfilePageType = {
       { id: "2", message: "Bye", likesCount: "0" },
     ],
     postText: '',
+    profile: null
   }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes): ProfilePageType => {
@@ -46,6 +75,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         
         case UPDATE_NEW_POST_TEXT: 
             return {...state, postText: action.newText}
+        
+        case SET_USER_PROFILE:
+            const res = {...state, profile: action.profile}
+            return res
         
         default: return state         
     }

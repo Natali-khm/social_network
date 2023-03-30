@@ -3,7 +3,7 @@ import "./App.css";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
-import Profile from "./Components/Profile/Profile";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 
 
@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/news">news</Route>
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>
-          <Route path="/"><Profile/></Route>
+          <Route path="/"><ProfileContainer/></Route>
         </Switch>
       </div>
     </div>
