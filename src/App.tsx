@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/news">news</Route>
           <Route path="/music">music</Route>
           <Route path="/settings">settings</Route>
-          <Route path="/"><ProfileContainer/></Route>
+          <Route path="/profile/:userId?"><ProfileContainer/></Route>
         </Switch>
       </div>
     </div>

@@ -11,9 +11,10 @@ const ProfileInfo = (props: MapStateToPropsType) => {
   return <div className={styles.profileInfoBlock}>
             <img src={props.profile.photos.large ? props.profile.photos.large : userAvatar}/>
             <div>
-              <div><b>{props.profile.fullName}</b></div>
+              <h1>{props.profile.fullName}</h1>
               <div>about me: {props.profile.aboutMe}</div>
-              <div>contacts: {props.profile.contacts.instagram}</div>
+              <div>contacts: {props.profile.contacts.instagram}, {props.profile.contacts.github}</div>
+              <div>job: {props.profile.lookingForAJobDescription}</div>
             </div> 
          </div>;
 };

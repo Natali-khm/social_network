@@ -28,7 +28,7 @@ const MyPosts: React.FC <MyPostsPropsType> = (props) => {
 
   return (
 
-    <div className={styles.MyPostsBlock}>
+    <div className={styles.myPostsBlock}>
       
       <h2>My posts</h2>
 

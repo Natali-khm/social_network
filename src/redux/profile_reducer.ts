@@ -27,18 +27,21 @@ export type ProfilePageType = {
     profile: ProfileType | null
 };
 
+
+type ContactsType = {
+  facebook: string | null
+  github: string | null
+  instagram: string | null
+  mainLink: string | null
+  twitter: string | null
+  vk: string | null
+  website: string | null
+  youtube: string | null
+}
+
 export type ProfileType = {
     aboutMe: string
-    contacts: {
-      facebook: string
-      website: string
-      vk: string
-      twitter: string
-      instagram: string
-      youtube: string
-      github: string
-      mainLink: string
-    },
+    contacts: ContactsType
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string

@@ -2,8 +2,8 @@ import { KeyboardEvent } from 'react'
 import { addPostAC, ProfilePageType, updateNewPostTextAC } from '../../../redux/profile_reducer';
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
-import { RootState } from '../../../redux/redux_store';
 import { Dispatch } from 'redux';
+import { RootStateType } from '../../../redux/redux_store';
 
 
 type MapStateToPropsType = {
@@ -19,7 +19,7 @@ type MapDispatchToPropsType = {
 export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 
-const mapStateToProps = (state: RootState): MapStateToPropsType => ({
+const mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
   profilePage: state.profilePage
 })
 

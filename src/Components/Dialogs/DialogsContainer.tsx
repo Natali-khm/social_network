@@ -2,7 +2,7 @@ import { KeyboardEvent } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { addMessageAC, updateNewMessageTextAC, DialogsPageType } from "../../redux/dialogs_reducer";
-import { RootState } from "../../redux/redux_store";
+import { RootStateType } from "../../redux/redux_store";
 import Dialogs from "./Dialogs";
 
 
@@ -20,7 +20,7 @@ export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 
 
-const mapStateToProps = (state: RootState): MapStateToPropsType => ({
+const mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
   dialogsPage: state.dialogsPage,
 })
 
