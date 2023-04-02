@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-import Header from "./Components/Header/Header";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 import Navbar from "./Components/Navbar/Navbar";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <div className="app-wrapper">
-      <Header />
+      <HeaderContainer />
       <Navbar />
       <div className="app-wrapper-content">
         <Switch>

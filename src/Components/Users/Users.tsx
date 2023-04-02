@@ -1,7 +1,5 @@
 import s from "./Users.module.css"
 import userAvatar from "../../assets/images/user_avatar.png";
-import axios from "axios";
-import React from "react";
 import { UserType } from "../../redux/users_reducer";
 import { Preloader } from "../common/Preloader";
 import { NavLink } from "react-router-dom";

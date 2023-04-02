@@ -6,6 +6,8 @@ import { RootStateType } from "../../redux/redux_store";
 import { ProfileType, setUserProfile } from "../../redux/profile_reducer";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
+
+
 export type MapStateToPropsType = {
   profile: ProfileType | null
 }
@@ -30,7 +32,6 @@ type ProfilePageCommonType = RouteComponentProps<PathParamsType> & ProfilePageTy
 class ProfileContainer extends React.Component <ProfilePageCommonType> {                                                                                // 3
 
   componentDidMount(){
-    debugger
     let userId = this.props.match.params.userId
     if (!userId) {userId = '2'}
 

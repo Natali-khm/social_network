@@ -3,8 +3,9 @@ import React from "react";
 import { connect } from "react-redux"
 import { RootStateType } from "../../redux/redux_store";
 import { follow, setCurrentPage, setIsFetching, setTotalUsersCount, setUsers, unfollow, UserType } from "../../redux/users_reducer"
-import { Preloader } from "../common/Preloader";
 import Users from "./Users";
+
+
 
 type MapStateToPropsType = {
   users: UserType[]
