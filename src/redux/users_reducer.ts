@@ -4,8 +4,8 @@ export const SET_USERS = 'SET_USERS'
 export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 export const IS_FETCHING = 'IS_FETCHING'
-export const follow = (id: string) => ({type: FOLLOW, userId: id} as const);
-export const unfollow = (id: string) => ({type: UNFOLLOW, userId: id} as const);
+export const follow = (id: number) => ({type: FOLLOW, userId: id} as const);
+export const unfollow = (id: number) => ({type: UNFOLLOW, userId: id} as const);
 export const setUsers = (users: UserType[]) => ({type: SET_USERS, users} as const);
 export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count} as const);
 export const setCurrentPage = (page: number) => ({type: SET_CURRENT_PAGE, page} as const);
@@ -20,14 +20,14 @@ type UsersPageActionTypes = | ReturnType<typeof follow>
 
 
 export type UserType = {
-    id: string
+    id: number
     name: string
-    status: string
-    location: {country: string, city: string}
+    status: string | null
+    // location: {country: string, city: string}
     followed: boolean
     photos: {
-        small: string
-        large: string
+        small: string | null
+        large: string | null
     }
 };
 

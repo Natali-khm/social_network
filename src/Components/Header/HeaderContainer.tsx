@@ -1,17 +1,10 @@
-import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
+import { authAPI, profileAPI } from "../../api/api";
 import { setAuthUserData, setUserPhoto, UserAuthData } from "../../redux/auth_reducer";
-import { ProfileType } from "../../redux/profile_reducer";
 import { RootStateType } from "../../redux/redux_store";
 import Header from "./Header";
 
-type ResponseType = {
-  data: UserAuthData
-  fieldsErrors: any                                //   any
-  messages: string[]
-  resultCode: number
-}
 
 export type MapStateToPropsType = {
   isAuth: boolean
@@ -33,18 +26,13 @@ export type HeaderContainerType = MapStateToPropsType  & MapDispatchToPropsType
 class HeaderContainer extends React.Component <HeaderContainerType> {                                                                               
 
   componentDidMount(){
-    axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-         .then(response => {
-                if (response.data.resultCode === 0){ 
-                  this.props.setAuthUserData(response.data.data)
+    authAPI.auth().then(response => {
+        if (response.data.resultCode === 0){ 
+          this.props.setAuthUserData(response.data.data)
 
-                  const userId = response.data.data.id
-                  axios.get<ProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-                        .then(response => {
-                          // debugger
-                          this.props.setUserPhoto(response.data.photos.small)
-                        })
-                }
+          const userId = response.data.data.id
+          userId && profileAPI.getProfile(userId).then(data => this.props.setUserPhoto(data.photos.small)
+          )}
   })}
 
   render(){ 
