@@ -6,7 +6,6 @@ import s from './Header.module.css'
 
 
 const Header = (props: HeaderContainerType) => {
-  debugger
   return (
     <>
       <header className={styles.header}>
