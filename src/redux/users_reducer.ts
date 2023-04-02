@@ -4,12 +4,15 @@ export const SET_USERS = 'SET_USERS'
 export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 export const IS_FETCHING = 'IS_FETCHING'
+export const FOLLOW_TOGGLE_PROGRESS = 'FOLLOW_TOGGLE_PROGRESS'
+
 export const follow = (id: number) => ({type: FOLLOW, userId: id} as const);
 export const unfollow = (id: number) => ({type: UNFOLLOW, userId: id} as const);
 export const setUsers = (users: UserType[]) => ({type: SET_USERS, users} as const);
 export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count} as const);
 export const setCurrentPage = (page: number) => ({type: SET_CURRENT_PAGE, page} as const);
 export const setIsFetching = (isFetching: boolean) => ({type: IS_FETCHING, isFetching} as const);
+export const setFollowToggle = (followProgress: boolean, id:number) => ({type: FOLLOW_TOGGLE_PROGRESS, followProgress, id} as const);
 
 type UsersPageActionTypes = | ReturnType<typeof follow>
                             | ReturnType<typeof unfollow>
@@ -17,6 +20,7 @@ type UsersPageActionTypes = | ReturnType<typeof follow>
                             | ReturnType<typeof setTotalUsersCount>
                             | ReturnType<typeof setCurrentPage>
                             | ReturnType<typeof setIsFetching>
+                            | ReturnType<typeof setFollowToggle>
 
 
 export type UserType = {
@@ -37,6 +41,7 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followToggleProgress: number[]
 };
 
 const initialState: UsersPageType = {
@@ -44,7 +49,8 @@ const initialState: UsersPageType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followToggleProgress: []
   }
 
 
@@ -68,6 +74,13 @@ export const usersReducer = (state: UsersPageType = initialState, action: UsersP
 
         case IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+
+        case FOLLOW_TOGGLE_PROGRESS:
+            return {...state,
+                    followToggleProgress: action.followProgress 
+                    ? [...state.followToggleProgress, action.id] 
+                    : state.followToggleProgress.filter(id => id !== action.id)
+                    }
         
         default: return state         
     }
