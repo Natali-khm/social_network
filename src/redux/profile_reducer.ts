@@ -8,11 +8,11 @@ export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profil
 
 //----------------------------------------------------------------------------------------------------------------//
 
-export type ActionTypes = ReturnType<typeof addPostAC> 
-                        | ReturnType<typeof updateNewPostTextAC> 
-                        | ReturnType<typeof updateNewMessageTextAC>
-                        | ReturnType<typeof addMessageAC>
-                        | ReturnType<typeof setUserProfile>
+export type ProfileActionsType =  ReturnType<typeof addPostAC> 
+                                | ReturnType<typeof updateNewPostTextAC> 
+                                | ReturnType<typeof updateNewMessageTextAC>
+                                | ReturnType<typeof addMessageAC>
+                                | ReturnType<typeof setUserProfile>
 
 
 export type PostType = {
@@ -63,7 +63,7 @@ const initialState: ProfilePageType = {
     profile: null
   }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsType): ProfilePageType => {
 
     switch (action.type) {
         case ADD_POST: 

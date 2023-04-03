@@ -1,6 +1,6 @@
 import s from "./Users.module.css"
 import userAvatar from "../../assets/images/user_avatar.png";
-import { UserType } from "../../redux/users_reducer";
+import { follow, UserType } from "../../redux/users_reducer";
 import { Preloader } from "../common/Preloader";
 import { NavLink } from "react-router-dom";
 import { followAPI } from "../../api/api";
@@ -13,9 +13,8 @@ type UsersPropsType = {
   isFetching: boolean
   followToggleProgress: number[]
   getUsers: (page:number) => void
-  follow: (id: number) => void
-  unfollow: (id: number) => void
-  setFollowToggle: (followProgress: boolean, id:number) => void
+  unfollow: (userId:number) => void
+  follow: (userId:number) => void
 }
 
 const Users = (props: UsersPropsType) => {
@@ -72,33 +71,19 @@ const Users = (props: UsersPropsType) => {
                           </NavLink>
                         </div>
 
-                        <div>{u.followed 
-                              ? <button onClick={() => {
-                                  props.setFollowToggle(true, u.id)
+                        <div>
+                          {u.followed 
+                              ? <button onClick = {() => props.unfollow(u.id)}
+                                        className = {s.btnFollow}
+                                        disabled = {props.followToggleProgress.some(id => id === u.id)}
+                                        >Unfollow
+                                </button>
 
-                                  followAPI.unfollow(u.id).then(response => {
-
-                                    props.setFollowToggle(false, u.id)
-                                    response.data.resultCode === 0 && props.unfollow(u.id)})}}
-                                         className = {s.btnFollow}
-                                         disabled={props.followToggleProgress.some(id => id === u.id)}
-
-                                >Unfollow</button>
-
-                              : <button onClick={() => {
-                                props.setFollowToggle(true, u.id)
-
-                                followAPI.follow(u.id).then(response => {
-
-                                  props.setFollowToggle(false, u.id)
-                                  response.data.resultCode === 0 && props.follow(u.id)
-                                
-                                })
-                              }
-                            } 
-                                disabled={props.followToggleProgress.some(id => id === u.id)}
-                                className = {s.btnFollow}
-                                >Follow</button>}
+                              : <button onClick = {() => props.follow(u.id)} 
+                                        className = {s.btnFollow}
+                                        disabled = {props.followToggleProgress.some(id => id === u.id)}
+                                        >Follow
+                                </button>}
                         </div>
 
                     </div>

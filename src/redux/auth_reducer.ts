@@ -25,9 +25,9 @@ const initialState = {
   isAuth: false
 };
 
-type ActionType = ReturnType<typeof setAuthUserData> | ReturnType<typeof setUserPhoto>
+export type AuthActionsType = ReturnType<typeof setAuthUserData> | ReturnType<typeof setUserPhoto>
 
-export const authReducer = (state: AuthStateType = initialState, action:ActionType): AuthStateType => {
+export const authReducer = (state: AuthStateType = initialState, action:AuthActionsType): AuthStateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {...state, authData: action.payload, isAuth: true}

@@ -1,10 +1,11 @@
-import { ActionTypes } from "./profile_reducer";
 
 export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
 
 export const addMessageAC = () => ({type: ADD_MESSAGE} as const);
 export const updateNewMessageTextAC = (newText: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText} as const);
+
+export type DialogsPageActionsType = ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
 
 type DialogType = {
   id: string;
@@ -39,7 +40,7 @@ const initialState = {
   newMessageText: ''
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTypes): DialogsPageType => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsPageActionsType): DialogsPageType => {
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage = {

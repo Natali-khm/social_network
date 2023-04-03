@@ -1,5 +1,5 @@
 import { addMessageAC, ADD_MESSAGE, dialogsReducer, updateNewMessageTextAC, UPDATE_NEW_MESSAGE_TEXT } from "./dialogs_reducer";
-import { ActionTypes, addPostAC, ADD_POST, profileReducer, updateNewPostTextAC, UPDATE_NEW_POST_TEXT } from "./profile_reducer";
+import { addPostAC, ADD_POST, profileReducer, updateNewPostTextAC, UPDATE_NEW_POST_TEXT } from "./profile_reducer";
 
 
 export type DialogType = {
@@ -41,7 +41,7 @@ export type StoreType = {
   getState:    () => TestStateType
   _rerender:   (state: TestStateType) => void
   subscribe:   (observer: (state: TestStateType) => void) => void
-  dispatch:    (action: ActionTypes) => void
+  dispatch:    (action: any) => void
 }
 
 

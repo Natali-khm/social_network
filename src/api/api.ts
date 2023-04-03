@@ -34,7 +34,6 @@ export const usersAPI = ({
         return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
                        .then(response => response.data)
     } 
-
 })
 
 export const profileAPI = ({
