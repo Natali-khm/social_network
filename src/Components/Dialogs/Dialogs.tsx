@@ -3,7 +3,8 @@ import { DialogType, MessageType } from "../../redux/testState";
 import DialogItem from "./DialogItem/DialogItem";
 import styles from "./Dialogs.module.css";
 import { DialogsPropsType } from "./DialogsContainer";
-import MessageItem from "./MessageItem/MessageItem";
+import MessageItem from "./MessageItem/MessageItem"
+import { Redirect } from "react-router-dom"
 
 
 
@@ -14,7 +15,10 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
   const addMessageHandler = () => props.addMessage()
 
   const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => props.onEnter(e)
-  
+
+  if(!props.isAuth) {
+    return <Redirect to={'/login'}/>
+  } 
 
   return (
 

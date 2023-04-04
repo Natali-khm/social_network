@@ -43,7 +43,7 @@ const initialState = {
 export const authReducer = (state: AuthStateType = initialState, action:AuthActionsType): AuthStateType => {
     switch (action.type) {
         case SET_USER_DATA:
-            return {...state, authData: action.payload, isAuth: true}
+            return {...state, authData: action.payload, isAuth: false}
 
         case SET_USER_PHOTO:
             return {...state, userPhoto: action.userPhoto}
@@ -56,7 +56,7 @@ export const authReducer = (state: AuthStateType = initialState, action:AuthActi
 export const getAuthUserData = () => (dispatch: Dispatch<AppActionsType>) => {
 
   authAPI
-    .auth()
+    .me()
     .then(response => {
 
       response.data.resultCode === 0 && dispatch(setAuthUserData(response.data.data))

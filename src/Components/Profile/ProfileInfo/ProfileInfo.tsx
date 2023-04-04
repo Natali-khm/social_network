@@ -1,10 +1,10 @@
 import { Preloader } from '../../common/Preloader';
-import { MapStateToPropsType } from '../ProfileContainer';
 import styles from './ProfileInfo.module.css'
 import userAvatar from '../../../assets/images/user_avatar.png'
+import { ProfileType } from '../../../redux/profile_reducer';
 
 
-const ProfileInfo = (props: MapStateToPropsType) => {
+const ProfileInfo = (props: {  profile: ProfileType | null }) => {
   if (!props.profile){
     return <Preloader/>
   }
