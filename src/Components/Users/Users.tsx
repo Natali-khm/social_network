@@ -1,9 +1,8 @@
 import s from "./Users.module.css"
 import userAvatar from "../../assets/images/user_avatar.png";
-import { follow, UserType } from "../../redux/users_reducer";
+import { UserType } from "../../redux/users_reducer";
 import { Preloader } from "../common/Preloader";
 import { NavLink } from "react-router-dom";
-import { followAPI } from "../../api/api";
 
 type UsersPropsType = {
   totalUsersCount: number

@@ -33,15 +33,21 @@ export const usersAPI = ({
     getUsers(currentPage: number = 1, pageSize:number = 10) {
         return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
                        .then(response => response.data)
-    } 
-})
-
-export const profileAPI = ({
+    },
     getProfile (userId:number) {
         return instance.get<ProfileType>(`profile/${userId}`)
                        .then(response => response.data)
+    },
+    unfollow(userId:number) {
+        return instance.delete(`follow/${userId}`)
+    },
+    follow(userId:number) {
+        return instance.post(`/follow/${userId}`)
     }
+
 })
+
+
 
 export const authAPI = ({
     auth() {
@@ -49,14 +55,6 @@ export const authAPI = ({
     }
 })
 
-export const followAPI = ({
-    unfollow(userId:number) {
-        return instance.delete(`follow/${userId}`)
-    },
-    follow(userId:number) {
-        return instance.post(`/follow/${userId}`)
-    }
-})
 
 
                      

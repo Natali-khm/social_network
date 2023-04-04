@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { followAPI, usersAPI } from "../api/api"
+import { usersAPI } from "../api/api"
 import { AppActionsType } from "./redux_store"
 
 export const FOLLOW = 'FOLLOW'
@@ -117,7 +117,7 @@ export const unfollow = (userId:number) => {
 
     dispatch(setFollowToggle(true, userId));
 
-    followAPI
+    usersAPI
         .unfollow(userId)
         .then((response) => {
             dispatch(setFollowToggle(false, userId));
@@ -132,7 +132,7 @@ export const follow = (userId: number) => {
 
     dispatch(setFollowToggle(true, userId))
 
-    followAPI
+    usersAPI
       .follow(userId)
       .then((response) => {
         response.data.resultCode === 0 && dispatch(followUser(userId))

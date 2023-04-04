@@ -1,4 +1,7 @@
+import { Dispatch } from "redux";
+import { usersAPI } from "../api/api";
 import { addMessageAC, updateNewMessageTextAC } from "./dialogs_reducer";
+import { AppActionsType } from "./redux_store";
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 export const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -87,4 +90,9 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
     }
 }
 
-  
+export const getUsers = (userId: number) => (dispatch: Dispatch<AppActionsType>) => {
+
+  usersAPI
+    .getProfile(userId)
+    .then((data) => dispatch(setUserProfile(data)))
+}
